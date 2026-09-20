@@ -50,6 +50,9 @@ export default function Footer() {
                 <Link to="/company/mission" className="text-white/80 hover:text-white transition-colors">Mission</Link>
               </li>
               <li>
+                <Link to="/company/our-approach" className="text-white/80 hover:text-white transition-colors">Our Approach</Link>
+              </li>
+              <li>
                 <Link to="/company/leadership" className="text-white/80 hover:text-white transition-colors">Leadership</Link>
               </li>
               <li>
