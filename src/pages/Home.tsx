@@ -2,6 +2,8 @@ import { motion } from "motion/react"
 import { Link } from "react-router-dom"
 import Button from "../components/ui/Button"
 import Carousel from "../components/ui/Carousel"
+import Faq from "../components/Faq"
+import Stats from "../components/Stats"
 import HeroVisual from "../components/HeroVisual"
 import Logo from "../components/Logo"
 import Marquee from "../components/motion/Marquee"
@@ -29,10 +31,10 @@ const steps = [
 ]
 
 const facts = [
-  { value: "4", label: "Connected divisions" },
-  { value: "13", label: "Domains, one platform" },
-  { value: "1", label: "Shared identity" },
-  { value: "22", label: "Technology programs" },
+  { value: 4, label: "Connected divisions" },
+  { value: 13, label: "Domains, one platform" },
+  { value: 1, label: "Shared identity" },
+  { value: 22, label: "Technology programs" },
 ]
 
 export default function Home() {
@@ -82,20 +84,7 @@ export default function Home() {
               </Button>
             </div>
 
-            <dl className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-4">
-              {facts.map((f, i) => (
-                <motion.div
-                  key={f.label}
-                  initial={{ opacity: 0, y: 12 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: 0.4 + i * 0.08 }}
-                >
-                  <dt className="sr-only">{f.label}</dt>
-                  <dd className="text-2xl font-extrabold text-white">{f.value}</dd>
-                  <dd className="mt-1 text-xs text-white/60">{f.label}</dd>
-                </motion.div>
-              ))}
-            </dl>
+            <Stats facts={facts} />
           </motion.div>
 
           <HeroVisual />
@@ -355,6 +344,11 @@ export default function Home() {
             </motion.div>
           </Reveal>
         </div>
+      </section>
+
+      {/* FAQ — toolkit: Component Lab faq + WebOS faq */}
+      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+        <Faq />
       </section>
 
       {/* Get started */}

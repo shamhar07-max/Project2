@@ -2,6 +2,7 @@ import { AnimatePresence, motion, MotionConfig } from "motion/react"
 import { useEffect } from "react"
 import { Route, Routes, useLocation } from "react-router-dom"
 import Footer from "./components/Footer"
+import MobileDock from "./components/MobileDock"
 import Nav from "./components/Nav"
 import About from "./pages/company/About"
 import Careers from "./pages/company/Careers"
@@ -65,6 +66,7 @@ export default function App() {
           </AnimatePresence>
         </main>
         <Footer />
+        <MobileDock />
       </div>
     </MotionConfig>
   )
