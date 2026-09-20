@@ -11,6 +11,7 @@ import Marquee from "../components/motion/Marquee"
 import Reveal from "../components/motion/Reveal"
 import Stagger, { StaggerItem } from "../components/motion/Stagger"
 import { divisions, industries, jobsService, portfolio } from "../data/content"
+import { academyLinks, academyStats } from "../data/academy"
 
 const steps = [
   {
@@ -202,6 +203,55 @@ export default function Home() {
               <Button href={`https://${jobsService.domain}`} variant="outline" className="whitespace-nowrap">
                 Visit Jobs
               </Button>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Academy spotlight — live division, linked both ways */}
+      <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
+        <div className="grid gap-10 rounded-3xl bg-navy p-8 text-white sm:p-12 lg:grid-cols-2 lg:items-center">
+          <Reveal>
+            <div className="inline-flex flex-col gap-2">
+              <Logo variant="wordmark" className="h-8 w-auto brightness-0 invert" />
+              <span className="flex items-center gap-2">
+                <span aria-hidden className="h-px w-6 bg-red" />
+                <span className="text-xs font-semibold uppercase tracking-[0.28em] text-white">
+                  Academy
+                </span>
+              </span>
+            </div>
+            <h2 className="mt-5 text-3xl font-bold sm:text-4xl">
+              The learning platform is live.
+            </h2>
+            <p className="mt-4 max-w-lg text-lg text-white/80">
+              66 course units across 4 tracks, 15 career bundles, and a 12-stage mission loop
+              in every course — running now at academy.digitalburj.com, feeding evidence into
+              Verified Talent.
+            </p>
+            <div className="mt-8 grid max-w-md grid-cols-2 gap-6 sm:grid-cols-4">
+              {academyStats.map((s) => (
+                <div key={s.label}>
+                  <p className="text-2xl font-extrabold">{s.value}</p>
+                  <p className="mt-1 text-xs text-white/60">{s.label}</p>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="flex flex-col gap-3 rounded-3xl border border-white/10 bg-white/5 p-6">
+              <Button to="/ecosystem/academy" variant="primary" size="lg">
+                Explore Academy division
+              </Button>
+              <Button href={academyLinks.catalogue} variant="outline-light" size="lg">
+                Open course catalogue
+              </Button>
+              <Button href={academyLinks.bundles} variant="outline-light" size="lg">
+                Browse 15 bundles
+              </Button>
+              <p className="mt-2 text-center text-xs text-white/60">
+                Same company · same identity standard · same evidence trail
+              </p>
             </div>
           </Reveal>
         </div>

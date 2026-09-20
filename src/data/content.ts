@@ -20,9 +20,10 @@ export const divisions: Division[] = [
     description:
       "Academy pairs an existing technology curriculum with proposed professional career training. Every path shares one learning and assessment system, so completion, assessed competence and independently verified evidence are always kept distinct.",
     highlights: [
-      "Individually purchasable technology and professional courses",
-      "Career bundles across technology and professional operations",
-      "Evidence-led assessment: Brief, Try, Build, Test, Defend, Ship",
+      "66 course units across 4 tracks — Technology, Professional Foundation, Professional Career, Advanced Professional",
+      "A 12-stage mission loop per course: Brief, Learn, Investigate, Try, Build, Break, Fix, Test, Explain, Defend, Ship, Evidence",
+      "Server-controlled roles with separated review and verification — staff never action their own work",
+      "Only Active courses enrollable today (DB-00 to DB-03); planned catalogue shown honestly, never sold early",
     ],
     image: "/images/academy-learner.webp",
     imageAlt: "A learner studying at a laptop in a DigitalBurj Academy workspace",

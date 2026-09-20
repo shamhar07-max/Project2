@@ -1,4 +1,6 @@
 import { Navigate, useParams } from "react-router-dom"
+import AcademyDetail from "../components/AcademyDetail"
+import DivisionLockup from "../components/DivisionLockup"
 import PageHero from "../components/PageHero"
 import Reveal from "../components/motion/Reveal"
 import Stagger, { StaggerItem } from "../components/motion/Stagger"
@@ -24,6 +26,7 @@ export default function EcosystemDivision() {
       />
       <section className="mx-auto max-w-4xl px-6 py-16 lg:px-8">
         <Reveal>
+          <DivisionLockup division={division.slug} className="mb-6" />
           <p className="text-lg text-slate">{division.description}</p>
         </Reveal>
 
@@ -39,8 +42,8 @@ export default function EcosystemDivision() {
           ))}
         </Stagger>
 
-        <Reveal delay={0.12} className="mt-10 flex flex-wrap gap-4">
-          <Button href={`https://${division.domain}`} variant="dark">
+        <Reveal delay={0.12} className="mt-10 flex flex-wrap gap-3">
+          <Button href={`https://${division.domain}`} variant="primary">
             Visit {division.tag}
           </Button>
           <Button to="/ecosystem" variant="outline">
@@ -48,6 +51,7 @@ export default function EcosystemDivision() {
           </Button>
         </Reveal>
       </section>
+      {division.slug === "academy" && <AcademyDetail />}
     </div>
   )
 }
