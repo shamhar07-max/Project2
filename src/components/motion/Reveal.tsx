@@ -10,8 +10,8 @@ type RevealProps = {
 }
 
 const makeVariants = (y: number): Variants => ({
-  hidden: { opacity: 0, y },
-  visible: { opacity: 1, y: 0 },
+  hidden: { opacity: 0, y, filter: "blur(6px)", scale: 0.985 },
+  visible: { opacity: 1, y: 0, filter: "blur(0px)", scale: 1 },
 })
 
 export default function Reveal({ children, className, delay = 0, y = 28, as = "div" }: RevealProps) {

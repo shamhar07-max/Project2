@@ -13,9 +13,10 @@ const chips = [
 export default function HeroVisual() {
   return (
     <div className="relative mx-auto aspect-square w-full max-w-md lg:max-w-lg">
-      {/* ambient background blobs — static, not particles */}
-      <div className="absolute -top-10 -right-10 h-56 w-56 rounded-full bg-red/20 blur-3xl" aria-hidden />
-      <div className="absolute -bottom-14 -left-10 h-64 w-64 rounded-full bg-white/10 blur-3xl" aria-hidden />
+      {/* ambient background blobs — animated aurora */}
+      <div className="absolute -top-10 -right-10 h-56 w-56 rounded-full bg-red/25 blur-3xl motion-safe:animate-aurora" aria-hidden />
+      <div className="absolute -bottom-14 -left-10 h-64 w-64 rounded-full bg-gold/20 blur-3xl motion-safe:animate-aurora" style={{ animationDelay: "-6s" }} aria-hidden />
+      <div aria-hidden className="absolute left-1/2 top-1/2 h-[115%] w-[115%] -translate-x-1/2 -translate-y-1/2 rounded-full opacity-30 motion-safe:animate-spin-slow" style={{ background: "conic-gradient(from 0deg, transparent 0%, rgba(227,27,35,0.35) 12%, transparent 25%, transparent 55%, rgba(199,164,94,0.35) 68%, transparent 80%)" }} />
 
       {/* dot grid */}
       <svg

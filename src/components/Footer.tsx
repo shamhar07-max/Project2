@@ -5,7 +5,8 @@ import Logo from "./Logo"
 
 export default function Footer() {
   return (
-    <footer className="border-t border-cloud bg-navy text-white">
+    <footer className="relative border-t border-white/10 bg-navy text-white">
+      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-glow to-gold" />
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-5">
           <div className="col-span-2 sm:col-span-3 lg:col-span-2">
@@ -81,9 +82,17 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-start justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/50 sm:flex-row sm:items-center">
           <p>&copy; {new Date().getFullYear()} DigitalBurj. All rights reserved.</p>
-          <div className="flex gap-6">
+          <div className="flex items-center gap-6">
             <Link to="/privacy" className="hover:text-white transition-colors">Privacy</Link>
             <Link to="/terms" className="hover:text-white transition-colors">Terms</Link>
+            <button
+              type="button"
+              onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/80 transition-all duration-300 hover:-translate-y-1 hover:border-gold hover:text-gold hover:shadow-[0_0_18px_-2px_rgba(199,164,94,0.8)]"
+              aria-label="Back to top"
+            >
+              ↑
+            </button>
           </div>
         </div>
       </div>

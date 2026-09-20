@@ -59,7 +59,7 @@ export default function Nav() {
           <Link to="/contact" className="text-sm font-semibold text-navy transition-colors hover:text-red">
             Sign In
           </Link>
-          <Button to="/get-started" variant="primary" className="px-5 py-2 text-sm">
+          <Button to="/get-started" variant="glow" size="sm" className="px-5">
             Get Started
           </Button>
         </div>
