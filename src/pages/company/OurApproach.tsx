@@ -1,4 +1,6 @@
+import { motion } from "motion/react"
 import PageHero from "../../components/PageHero"
+import Stagger, { StaggerItem } from "../../components/motion/Stagger"
 
 const principles = [
   {
@@ -28,14 +30,16 @@ export default function OurApproach() {
         description="The operating philosophy and process behind every DigitalBurj division."
       />
       <section className="mx-auto max-w-5xl px-6 py-16 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-2">
+        <Stagger className="grid gap-8 sm:grid-cols-2">
           {principles.map((p) => (
-            <div key={p.title} className="rounded-xl border border-cloud p-6">
-              <h3 className="text-lg font-bold text-navy">{p.title}</h3>
-              <p className="mt-2 text-sm text-slate">{p.body}</p>
-            </div>
+            <StaggerItem key={p.title}>
+              <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }} className="h-full rounded-xl border border-cloud p-6">
+                <h3 className="text-lg font-bold text-navy">{p.title}</h3>
+                <p className="mt-2 text-sm text-slate">{p.body}</p>
+              </motion.div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </section>
     </div>
   )

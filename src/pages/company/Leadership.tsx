@@ -1,4 +1,5 @@
 import PageHero from "../../components/PageHero"
+import Reveal from "../../components/motion/Reveal"
 
 export default function Leadership() {
   return (
@@ -8,7 +9,7 @@ export default function Leadership() {
         title="Leadership"
         description="Leadership and operating responsibilities across DigitalBurj."
       />
-      <section className="mx-auto max-w-3xl px-6 py-16 text-center lg:px-8">
+      <Reveal className="mx-auto max-w-3xl px-6 py-16 text-center lg:px-8">
         <p className="text-lg text-slate">
           Leadership profiles are being prepared for publication. In the meantime, reach the
           leadership team directly through{" "}
@@ -17,7 +18,7 @@ export default function Leadership() {
           </a>
           .
         </p>
-      </section>
+      </Reveal>
     </div>
   )
 }

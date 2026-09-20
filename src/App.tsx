@@ -1,5 +1,6 @@
-import { Route, Routes, useLocation } from "react-router-dom"
+import { AnimatePresence, motion, MotionConfig } from "motion/react"
 import { useEffect } from "react"
+import { Route, Routes, useLocation } from "react-router-dom"
 import Footer from "./components/Footer"
 import Nav from "./components/Nav"
 import About from "./pages/company/About"
@@ -27,30 +28,44 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const location = useLocation()
+
   return (
-    <div className="flex min-h-screen flex-col">
-      <ScrollToTop />
-      <Nav />
-      <main className="flex-1">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/company/about" element={<About />} />
-          <Route path="/company/mission" element={<Mission />} />
-          <Route path="/company/our-approach" element={<OurApproach />} />
-          <Route path="/company/leadership" element={<Leadership />} />
-          <Route path="/company/careers" element={<Careers />} />
-          <Route path="/ecosystem" element={<Ecosystem />} />
-          <Route path="/ecosystem/:slug" element={<EcosystemDivision />} />
-          <Route path="/technology" element={<Technology />} />
-          <Route path="/portfolio" element={<Portfolio />} />
-          <Route path="/get-started" element={<GetStarted />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/privacy" element={<Privacy />} />
-          <Route path="/terms" element={<Terms />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-      <Footer />
-    </div>
+    <MotionConfig reducedMotion="user">
+      <div className="flex min-h-screen flex-col">
+        <ScrollToTop />
+        <Nav />
+        <main className="flex-1">
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25, ease: "easeOut" }}
+            >
+              <Routes location={location}>
+                <Route path="/" element={<Home />} />
+                <Route path="/company/about" element={<About />} />
+                <Route path="/company/mission" element={<Mission />} />
+                <Route path="/company/our-approach" element={<OurApproach />} />
+                <Route path="/company/leadership" element={<Leadership />} />
+                <Route path="/company/careers" element={<Careers />} />
+                <Route path="/ecosystem" element={<Ecosystem />} />
+                <Route path="/ecosystem/:slug" element={<EcosystemDivision />} />
+                <Route path="/technology" element={<Technology />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/get-started" element={<GetStarted />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </motion.div>
+          </AnimatePresence>
+        </main>
+        <Footer />
+      </div>
+    </MotionConfig>
   )
 }

@@ -1,4 +1,5 @@
 import PageHero from "../../components/PageHero"
+import Reveal from "../../components/motion/Reveal"
 
 export default function About() {
   return (
@@ -9,7 +10,7 @@ export default function About() {
         description="DigitalBurj connects practical education, technology delivery, business intelligence and evidence-backed professional opportunity in one coordinated ecosystem."
       />
       <section className="mx-auto max-w-3xl px-6 py-16 lg:px-8">
-        <div className="space-y-6 text-lg text-slate">
+        <Reveal className="space-y-6 text-lg text-slate">
           <p>
             DigitalBurj is one company operating a connected platform, with distinct divisional
             experiences — Academy, Studio, Business AI and Verified Talent — sharing accounts,
@@ -26,7 +27,7 @@ export default function About() {
             avoid promising guaranteed employment, visas, earnings, instant capability or
             unverified performance figures — claims are shown as evidence, not assumed.
           </p>
-        </div>
+        </Reveal>
       </section>
     </div>
   )

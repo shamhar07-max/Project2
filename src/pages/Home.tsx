@@ -1,5 +1,12 @@
+import { motion } from "motion/react"
 import { Link } from "react-router-dom"
+import Button from "../components/ui/Button"
+import Carousel from "../components/ui/Carousel"
+import HeroVisual from "../components/HeroVisual"
 import Logo from "../components/Logo"
+import Marquee from "../components/motion/Marquee"
+import Reveal from "../components/motion/Reveal"
+import Stagger, { StaggerItem } from "../components/motion/Stagger"
 import { divisions, industries, jobsService, portfolio } from "../data/content"
 
 const steps = [
@@ -21,46 +28,77 @@ const steps = [
   },
 ]
 
+const facts = [
+  { value: "4", label: "Connected divisions" },
+  { value: "13", label: "Domains, one platform" },
+  { value: "1", label: "Shared identity" },
+  { value: "22", label: "Technology programs" },
+]
+
 export default function Home() {
   return (
     <div>
-      {/* Introduction */}
+      {/* Introduction / Hero */}
       <section className="relative overflow-hidden bg-navy text-white">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8 lg:py-32">
-          <div className="max-w-3xl">
+        <div
+          className="absolute inset-0 opacity-[0.25]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 15% 20%, rgba(227,27,35,0.25), transparent 40%), radial-gradient(circle at 85% 0%, rgba(255,255,255,0.12), transparent 45%)",
+          }}
+          aria-hidden
+        />
+        <div className="relative mx-auto grid max-w-7xl gap-16 px-6 py-20 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-28">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
+            className="max-w-xl"
+          >
             <p className="text-sm font-semibold uppercase tracking-widest text-red">
               People. Technology. Opportunity.
             </p>
-            <h1 className="mt-5 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-5 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
               A higher tomorrow, built on evidence.
             </h1>
-            <p className="mt-6 max-w-2xl text-lg text-white/80">
+            <p className="mt-6 max-w-lg text-lg text-white/80">
               DigitalBurj connects practical education, technology delivery, business
               intelligence and evidence-backed professional opportunity in one coordinated
               ecosystem.
             </p>
             <div className="mt-10 flex flex-wrap gap-4">
-              <Link
-                to="/get-started"
-                className="rounded-md bg-red px-6 py-3 text-sm font-semibold text-white hover:opacity-90"
-              >
+              <Button to="/get-started" variant="primary" icon={<ArrowIcon />}>
                 Get Started
-              </Link>
-              <Link
-                to="/ecosystem"
-                className="rounded-md border border-white/30 px-6 py-3 text-sm font-semibold text-white hover:bg-white/10"
-              >
+              </Button>
+              <Button to="/ecosystem" variant="outline-light">
                 Explore the Ecosystem
-              </Link>
+              </Button>
             </div>
-          </div>
+
+            <dl className="mt-14 grid grid-cols-2 gap-6 sm:grid-cols-4">
+              {facts.map((f, i) => (
+                <motion.div
+                  key={f.label}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: 0.4 + i * 0.08 }}
+                >
+                  <dt className="sr-only">{f.label}</dt>
+                  <dd className="text-2xl font-extrabold text-white">{f.value}</dd>
+                  <dd className="mt-1 text-xs text-white/60">{f.label}</dd>
+                </motion.div>
+              ))}
+            </dl>
+          </motion.div>
+
+          <HeroVisual />
         </div>
       </section>
 
       {/* About */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
+          <Reveal>
             <p className="text-sm font-semibold uppercase tracking-wider text-red">About</p>
             <h2 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
               One company. One connected platform.
@@ -73,26 +111,32 @@ export default function Home() {
             </p>
             <Link
               to="/company/about"
-              className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-navy hover:text-red"
+              className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-navy transition-colors hover:text-red"
             >
               More about DigitalBurj <span aria-hidden>→</span>
             </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-6">
+          </Reveal>
+          <Stagger className="grid grid-cols-2 gap-6">
             {steps.map((s) => (
-              <div key={s.step} className="rounded-xl border border-cloud bg-white p-6 shadow-sm">
-                <p className="text-lg font-bold text-navy">{s.step}</p>
-                <p className="mt-2 text-sm text-slate">{s.body}</p>
-              </div>
+              <StaggerItem key={s.step}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.2 }}
+                  className="h-full rounded-xl border border-cloud bg-white p-6 shadow-sm"
+                >
+                  <p className="text-lg font-bold text-navy">{s.step}</p>
+                  <p className="mt-2 text-sm text-slate">{s.body}</p>
+                </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* Four divisions */}
       <section className="bg-cloud">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-          <div className="max-w-2xl">
+          <Reveal className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-wider text-red">Ecosystem</p>
             <h2 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
               Four divisions, one recognition device.
@@ -101,76 +145,79 @@ export default function Home() {
               Each division carries the same DigitalBurj mark, distinguished by a text
               descriptor rather than an invented replacement symbol.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {divisions.map((d) => (
-              <Link
-                key={d.slug}
-                to={`/ecosystem/${d.slug}`}
-                className="group flex flex-col rounded-xl border border-cloud bg-white p-6 shadow-sm transition-shadow hover:shadow-md"
-              >
-                <span className="text-xs font-semibold uppercase tracking-wider text-red">
-                  {d.tag}
-                </span>
-                <h3 className="mt-2 text-lg font-bold text-navy">{d.name}</h3>
-                <p className="mt-2 flex-1 text-sm text-slate">{d.summary}</p>
-                <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-navy group-hover:text-red">
-                  Learn more <span aria-hidden>→</span>
-                </span>
-              </Link>
+              <StaggerItem key={d.slug} className="h-full">
+                <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.22 }} className="h-full">
+                  <Link
+                    to={`/ecosystem/${d.slug}`}
+                    className="group flex h-full flex-col rounded-xl border border-cloud bg-white p-6 shadow-sm transition-shadow hover:shadow-lg"
+                  >
+                    <span className="text-xs font-semibold uppercase tracking-wider text-red">
+                      {d.tag}
+                    </span>
+                    <h3 className="mt-2 text-lg font-bold text-navy">{d.name}</h3>
+                    <p className="mt-2 flex-1 text-sm text-slate">{d.summary}</p>
+                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-navy transition-transform group-hover:translate-x-1 group-hover:text-red">
+                      Learn more <span aria-hidden>→</span>
+                    </span>
+                  </Link>
+                </motion.div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
 
-          <div className="mt-8 flex flex-col items-start justify-between gap-4 rounded-xl border border-cloud bg-white p-6 shadow-sm sm:flex-row sm:items-center">
-            <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-red">
-                {jobsService.tag}
-              </span>
-              <p className="mt-1 text-sm text-slate">{jobsService.summary}</p>
+          <Reveal delay={0.1} className="mt-8">
+            <div className="flex flex-col items-start justify-between gap-4 rounded-xl border border-cloud bg-white p-6 shadow-sm sm:flex-row sm:items-center">
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-wider text-red">
+                  {jobsService.tag}
+                </span>
+                <p className="mt-1 text-sm text-slate">{jobsService.summary}</p>
+              </div>
+              <Button href={`https://${jobsService.domain}`} variant="outline" className="whitespace-nowrap">
+                Visit Jobs
+              </Button>
             </div>
-            <a
-              href={`https://${jobsService.domain}`}
-              className="whitespace-nowrap rounded-md border border-navy px-4 py-2 text-sm font-semibold text-navy hover:bg-navy hover:text-white"
-            >
-              Visit Jobs
-            </a>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* How DigitalBurj works */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div className="max-w-2xl">
+        <Reveal className="max-w-2xl">
           <p className="text-sm font-semibold uppercase tracking-wider text-red">
             How DigitalBurj works
           </p>
           <h2 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
             One identity, evidence that carries forward.
           </h2>
-        </div>
-        <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        </Reveal>
+        <Stagger className="relative mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="absolute left-0 right-0 top-4 hidden h-px bg-cloud lg:block" aria-hidden />
           {[
             "Discover the company and choose a division",
             "Sign in once with a shared DigitalBurj identity",
             "Learn, build or engage inside the right workspace",
             "Evidence and outcomes carry into your profile",
           ].map((item, i) => (
-            <li key={item} className="relative pl-12">
-              <span className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-navy text-sm font-bold text-white">
+            <StaggerItem key={item} className="relative pl-12">
+              <span className="absolute left-0 top-0 flex h-8 w-8 items-center justify-center rounded-full bg-navy text-sm font-bold text-white ring-4 ring-white">
                 {i + 1}
               </span>
               <p className="text-sm text-slate">{item}</p>
-            </li>
+            </StaggerItem>
           ))}
-        </ol>
+        </Stagger>
       </section>
 
       {/* Technology */}
       <section className="bg-navy text-white">
         <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
           <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-            <div>
+            <Reveal>
               <p className="text-sm font-semibold uppercase tracking-wider text-red">Technology</p>
               <h2 className="mt-3 text-3xl font-bold sm:text-4xl">
                 Engineering built for authorization, evidence and reliability.
@@ -183,77 +230,91 @@ export default function Home() {
               </p>
               <Link
                 to="/technology"
-                className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-white hover:text-red"
+                className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-white transition-colors hover:text-red"
               >
                 Explore our technology <span aria-hidden>→</span>
               </Link>
-            </div>
-            <div className="rounded-xl border border-white/10 bg-white/5 p-8">
-              <Logo variant="icon" className="h-16 w-16 rounded-lg" />
-              <ul className="mt-6 space-y-3 text-sm text-white/80">
-                <li>Shared identity, sessions and organizations</li>
-                <li>One authenticated workspace across every division</li>
-                <li>A controlled API boundary, not an open surface</li>
-                <li>Independent verification, separate from initial approval</li>
-              </ul>
-            </div>
+            </Reveal>
+            <Reveal delay={0.12}>
+              <motion.div
+                whileHover={{ y: -4 }}
+                className="rounded-xl border border-white/10 bg-white/5 p-8"
+              >
+                <Logo variant="icon" className="h-16 w-16 rounded-lg" />
+                <ul className="mt-6 space-y-3 text-sm text-white/80">
+                  <li>Shared identity, sessions and organizations</li>
+                  <li>One authenticated workspace across every division</li>
+                  <li>A controlled API boundary, not an open surface</li>
+                  <li>Independent verification, separate from initial approval</li>
+                </ul>
+              </motion.div>
+            </Reveal>
           </div>
         </div>
       </section>
 
-      {/* Portfolio */}
+      {/* Portfolio carousel */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-        <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
+        <Reveal className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <div className="max-w-2xl">
             <p className="text-sm font-semibold uppercase tracking-wider text-red">Portfolio</p>
             <h2 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
               Verified work across the ecosystem.
             </h2>
           </div>
-          <Link
-            to="/portfolio"
-            className="whitespace-nowrap text-sm font-semibold text-navy hover:text-red"
-          >
+          <Link to="/portfolio" className="whitespace-nowrap text-sm font-semibold text-navy hover:text-red">
             View full portfolio →
           </Link>
-        </div>
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {portfolio.slice(0, 5).map((p) => (
-            <div key={p.name} className="rounded-xl border border-cloud p-5">
-              <p className="font-bold text-navy">{p.name}</p>
-              <p className="mt-1 text-sm text-slate">{p.description}</p>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-slate/70">
-                {p.status}
-              </p>
-            </div>
-          ))}
-        </div>
+        </Reveal>
+
+        <Reveal delay={0.1} className="mt-10">
+          <Carousel slideClassName="basis-[85%] pr-4 sm:basis-1/2 lg:basis-1/3">
+            {portfolio.map((p) => (
+              <motion.div
+                key={p.name}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
+                className="h-full rounded-xl border border-cloud p-6"
+              >
+                <p className="font-bold text-navy">{p.name}</p>
+                <p className="mt-1 text-sm text-slate">{p.description}</p>
+                <p className="mt-3 text-xs font-semibold uppercase tracking-wider text-slate/70">
+                  {p.status}
+                </p>
+              </motion.div>
+            ))}
+          </Carousel>
+        </Reveal>
       </section>
 
-      {/* Industries */}
-      <section className="bg-cloud">
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-wider text-red">Industries</p>
-          <h2 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
-            Sectors we work alongside.
-          </h2>
-          <div className="mt-8 flex flex-wrap gap-3">
-            {industries.map((industry) => (
+      {/* Industries marquee */}
+      <section className="bg-cloud py-20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <Reveal>
+            <p className="text-sm font-semibold uppercase tracking-wider text-red">Industries</p>
+            <h2 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
+              Sectors we work alongside.
+            </h2>
+          </Reveal>
+        </div>
+        <Reveal delay={0.1} className="mt-10">
+          <Marquee durationSeconds={24}>
+            {[...industries, ...industries].map((industry, i) => (
               <span
-                key={industry}
-                className="rounded-full border border-navy/15 bg-white px-4 py-2 text-sm font-medium text-navy"
+                key={`${industry}-${i}`}
+                className="whitespace-nowrap rounded-full border border-navy/15 bg-white px-5 py-2.5 text-sm font-medium text-navy"
               >
                 {industry}
               </span>
             ))}
-          </div>
-        </div>
+          </Marquee>
+        </Reveal>
       </section>
 
       {/* People */}
       <section className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-          <div>
+          <Reveal>
             <p className="text-sm font-semibold uppercase tracking-wider text-red">People</p>
             <h2 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
               Direct, precise and evidence-led.
@@ -263,21 +324,31 @@ export default function Home() {
               guarantees. Technical claims stay understandable, and examples are verified before
               they are published.
             </p>
-          </div>
-          <div className="rounded-xl border border-cloud bg-white p-8 shadow-sm">
-            <p className="text-lg font-semibold text-navy">What we do not promise</p>
-            <ul className="mt-4 space-y-2 text-sm text-slate">
-              <li>Guaranteed employment, visas, or earnings</li>
-              <li>Instant capability or unverified performance figures</li>
-              <li>Employment or licensing rules presented as universal</li>
-            </ul>
-          </div>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <motion.div whileHover={{ y: -4 }} className="rounded-xl border border-cloud bg-white p-8 shadow-sm">
+              <p className="text-lg font-semibold text-navy">What we do not promise</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate">
+                <li>Guaranteed employment, visas, or earnings</li>
+                <li>Instant capability or unverified performance figures</li>
+                <li>Employment or licensing rules presented as universal</li>
+              </ul>
+            </motion.div>
+          </Reveal>
         </div>
       </section>
 
       {/* Get started */}
-      <section className="bg-navy">
-        <div className="mx-auto max-w-4xl px-6 py-20 text-center lg:px-8">
+      <section className="relative overflow-hidden bg-navy">
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 50% 0%, rgba(227,27,35,0.4), transparent 55%)",
+          }}
+          aria-hidden
+        />
+        <Reveal className="relative mx-auto max-w-4xl px-6 py-20 text-center lg:px-8">
           <h2 className="text-3xl font-bold text-white sm:text-4xl">
             Choose how you want to engage.
           </h2>
@@ -286,15 +357,27 @@ export default function Home() {
             point.
           </p>
           <div className="mt-10 flex justify-center">
-            <Link
-              to="/get-started"
-              className="rounded-md bg-red px-8 py-3 text-base font-semibold text-white hover:opacity-90"
-            >
+            <Button to="/get-started" variant="primary" className="px-8 py-3.5 text-base" icon={<ArrowIcon />}>
               Get Started
-            </Link>
+            </Button>
           </div>
-        </div>
+        </Reveal>
       </section>
     </div>
+  )
+}
+
+function ArrowIcon() {
+  return (
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      aria-hidden="true"
+      className="transition-transform group-hover:translate-x-1"
+    >
+      <path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   )
 }

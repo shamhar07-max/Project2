@@ -1,4 +1,5 @@
 import PageHero from "../../components/PageHero"
+import Reveal from "../../components/motion/Reveal"
 
 export default function Mission() {
   return (
@@ -9,7 +10,7 @@ export default function Mission() {
         description="A higher tomorrow, built on evidence rather than promises."
       />
       <section className="mx-auto max-w-3xl px-6 py-16 lg:px-8">
-        <div className="space-y-6 text-lg text-slate">
+        <Reveal className="space-y-6 text-lg text-slate">
           <p>
             Our mission is to make practical capability visible and trustworthy — for learners
             building new skills, for businesses commissioning technology, and for employers
@@ -20,7 +21,7 @@ export default function Mission() {
             share the same identity and the same evidence standard, so progress in any part of
             DigitalBurj means something everywhere else.
           </p>
-        </div>
+        </Reveal>
       </section>
     </div>
   )

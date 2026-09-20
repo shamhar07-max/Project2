@@ -1,5 +1,8 @@
-import { Link } from "react-router-dom"
+import { motion } from "motion/react"
 import PageHero from "../components/PageHero"
+import Reveal from "../components/motion/Reveal"
+import Stagger, { StaggerItem } from "../components/motion/Stagger"
+import Button from "../components/ui/Button"
 import { divisions, jobsService } from "../data/content"
 
 const intents = [
@@ -38,49 +41,44 @@ export default function GetStarted() {
         description="Learner, founder, business owner or employer — pick the entry point that matches you."
       />
       <section className="mx-auto max-w-6xl px-6 py-16 lg:px-8">
-        <div className="grid gap-6 sm:grid-cols-2">
+        <Stagger className="grid gap-6 sm:grid-cols-2">
           {intents.map((intent) => {
             const division = divisions.find((d) => intent.to.endsWith(d.slug))
             return (
-              <div key={intent.label} className="rounded-xl border border-cloud p-8">
-                <h3 className="text-xl font-bold text-navy">{intent.label}</h3>
-                <p className="mt-3 text-sm text-slate">{intent.body}</p>
-                <div className="mt-6 flex flex-wrap gap-3">
-                  <Link
-                    to={intent.to}
-                    className="rounded-md bg-navy px-5 py-2.5 text-sm font-semibold text-white hover:opacity-90"
-                  >
-                    {intent.cta}
-                  </Link>
-                  {division && (
-                    <a
-                      href={`https://${division.domain}`}
-                      className="rounded-md border border-navy/20 px-5 py-2.5 text-sm font-semibold text-navy hover:bg-cloud"
-                    >
-                      Go to {division.tag}
-                    </a>
-                  )}
-                </div>
-              </div>
+              <StaggerItem key={intent.label}>
+                <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.2 }} className="h-full rounded-xl border border-cloud p-8">
+                  <h3 className="text-xl font-bold text-navy">{intent.label}</h3>
+                  <p className="mt-3 text-sm text-slate">{intent.body}</p>
+                  <div className="mt-6 flex flex-wrap gap-3">
+                    <Button to={intent.to} variant="dark">
+                      {intent.cta}
+                    </Button>
+                    {division && (
+                      <Button href={`https://${division.domain}`} variant="outline">
+                        Go to {division.tag}
+                      </Button>
+                    )}
+                  </div>
+                </motion.div>
+              </StaggerItem>
             )
           })}
-        </div>
+        </Stagger>
 
-        <div className="mt-6 flex flex-col items-start justify-between gap-4 rounded-xl border border-cloud bg-cloud p-8 sm:flex-row sm:items-center">
-          <div>
-            <h3 className="text-xl font-bold text-navy">I'm looking for a job</h3>
-            <p className="mt-2 text-sm text-slate">
-              An Academy credential is not required for every applicant — Jobs is an open,
-              connected opportunity marketplace.
-            </p>
+        <Reveal delay={0.1} className="mt-6">
+          <div className="flex flex-col items-start justify-between gap-4 rounded-xl border border-cloud bg-cloud p-8 sm:flex-row sm:items-center">
+            <div>
+              <h3 className="text-xl font-bold text-navy">I'm looking for a job</h3>
+              <p className="mt-2 text-sm text-slate">
+                An Academy credential is not required for every applicant — Jobs is an open,
+                connected opportunity marketplace.
+              </p>
+            </div>
+            <Button href={`https://${jobsService.domain}`} variant="primary" className="whitespace-nowrap">
+              Visit Jobs
+            </Button>
           </div>
-          <a
-            href={`https://${jobsService.domain}`}
-            className="whitespace-nowrap rounded-md bg-red px-6 py-3 text-sm font-semibold text-white hover:opacity-90"
-          >
-            Visit Jobs
-          </a>
-        </div>
+        </Reveal>
       </section>
     </div>
   )

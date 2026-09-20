@@ -8,6 +8,29 @@
   --color-ink: #152536;
   --color-slate: #617184;
   --color-cloud: #f2f5f7;
+
+  --animate-marquee: marquee 28s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-slow: float 9s ease-in-out infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @layer base {
@@ -19,5 +42,11 @@
     background-color: #ffffff;
     color: var(--color-ink);
     font-family: var(--font-sans);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
   }
 }

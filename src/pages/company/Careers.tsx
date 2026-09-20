@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import PageHero from "../../components/PageHero"
+import Reveal from "../../components/motion/Reveal"
 
 export default function Careers() {
   return (
@@ -9,7 +10,7 @@ export default function Careers() {
         title="Careers at DigitalBurj"
         description="DigitalBurj corporate vacancies across engineering, education, business AI and operations."
       />
-      <section className="mx-auto max-w-3xl px-6 py-16 text-center lg:px-8">
+      <Reveal className="mx-auto max-w-3xl px-6 py-16 text-center lg:px-8">
         <p className="text-lg text-slate">
           Open corporate roles will be listed here as they are approved. Looking for a role at a
           division instead of at DigitalBurj corporate?{" "}
@@ -18,7 +19,7 @@ export default function Careers() {
           </Link>{" "}
           or visit DigitalBurj Jobs.
         </p>
-      </section>
+      </Reveal>
     </div>
   )
 }
