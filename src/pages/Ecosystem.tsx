@@ -21,16 +21,28 @@ export default function Ecosystem() {
               <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.22 }} className="h-full">
                 <Link
                   to={`/ecosystem/${d.slug}`}
-                  className="group flex h-full flex-col rounded-xl border border-cloud bg-white p-8 shadow-sm transition-shadow hover:shadow-lg"
+                  className="group flex h-full flex-col overflow-hidden rounded-xl border border-cloud bg-white shadow-sm transition-shadow hover:shadow-lg"
                 >
-                  <span className="text-xs font-semibold uppercase tracking-wider text-red">
-                    {d.tag}
-                  </span>
-                  <h2 className="mt-2 text-2xl font-bold text-navy">{d.name}</h2>
-                  <p className="mt-3 text-sm text-slate">{d.summary}</p>
-                  <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-navy transition-transform group-hover:translate-x-1 group-hover:text-red">
-                    Division overview <span aria-hidden>→</span>
-                  </span>
+                  {d.image && (
+                    <div className="aspect-[16/9] w-full overflow-hidden bg-cloud">
+                      <img
+                        src={d.image}
+                        alt={d.imageAlt ?? ""}
+                        loading="lazy"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  )}
+                  <div className="flex flex-1 flex-col p-8">
+                    <span className="text-xs font-semibold uppercase tracking-wider text-red">
+                      {d.tag}
+                    </span>
+                    <h2 className="mt-2 text-2xl font-bold text-navy">{d.name}</h2>
+                    <p className="mt-3 text-sm text-slate">{d.summary}</p>
+                    <span className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-navy transition-transform group-hover:translate-x-1 group-hover:text-red">
+                      Division overview <span aria-hidden>→</span>
+                    </span>
+                  </div>
                 </Link>
               </motion.div>
             </StaggerItem>

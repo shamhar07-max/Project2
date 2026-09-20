@@ -6,6 +6,8 @@ export type Division = {
   summary: string
   description: string
   highlights: string[]
+  image?: string
+  imageAlt?: string
 }
 
 export const divisions: Division[] = [
@@ -22,6 +24,8 @@ export const divisions: Division[] = [
       "Career bundles across technology and professional operations",
       "Evidence-led assessment: Brief, Try, Build, Test, Defend, Ship",
     ],
+    image: "/images/academy-learner.webp",
+    imageAlt: "A learner studying at a laptop in a DigitalBurj Academy workspace",
   },
   {
     slug: "studio",
@@ -36,6 +40,8 @@ export const divisions: Division[] = [
       "API engineering, integrations and technical architecture",
       "Milestones, deliverables and acceptance tracked in one workspace",
     ],
+    image: "/images/studio-engineers.webp",
+    imageAlt: "Two DigitalBurj Studio engineers reviewing code together at dual monitors",
   },
   {
     slug: "business-ai",
@@ -50,6 +56,8 @@ export const divisions: Division[] = [
       "CRM, sales, service, document and reporting workflows",
       "Outcomes measured and reported, not assumed",
     ],
+    image: "/images/business-ai-team.webp",
+    imageAlt: "A DigitalBurj Business AI team reviewing an engagement together",
   },
   {
     slug: "verified-talent",

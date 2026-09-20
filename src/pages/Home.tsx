@@ -40,11 +40,18 @@ export default function Home() {
     <div>
       {/* Introduction / Hero */}
       <section className="relative overflow-hidden bg-navy text-white">
+        <img
+          src="/images/hero-team.webp"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 h-full w-full object-cover opacity-40"
+          loading="eager"
+        />
         <div
-          className="absolute inset-0 opacity-[0.25]"
+          className="absolute inset-0"
           style={{
             backgroundImage:
-              "radial-gradient(circle at 15% 20%, rgba(227,27,35,0.25), transparent 40%), radial-gradient(circle at 85% 0%, rgba(255,255,255,0.12), transparent 45%)",
+              "linear-gradient(100deg, rgba(16,39,60,0.97) 20%, rgba(16,39,60,0.85) 45%, rgba(16,39,60,0.6) 75%), radial-gradient(circle at 15% 20%, rgba(227,27,35,0.2), transparent 40%)",
           }}
           aria-hidden
         />
@@ -153,16 +160,28 @@ export default function Home() {
                 <motion.div whileHover={{ y: -6 }} transition={{ duration: 0.22 }} className="h-full">
                   <Link
                     to={`/ecosystem/${d.slug}`}
-                    className="group flex h-full flex-col rounded-xl border border-cloud bg-white p-6 shadow-sm transition-shadow hover:shadow-lg"
+                    className="group flex h-full flex-col overflow-hidden rounded-xl border border-cloud bg-white shadow-sm transition-shadow hover:shadow-lg"
                   >
-                    <span className="text-xs font-semibold uppercase tracking-wider text-red">
-                      {d.tag}
-                    </span>
-                    <h3 className="mt-2 text-lg font-bold text-navy">{d.name}</h3>
-                    <p className="mt-2 flex-1 text-sm text-slate">{d.summary}</p>
-                    <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-navy transition-transform group-hover:translate-x-1 group-hover:text-red">
-                      Learn more <span aria-hidden>→</span>
-                    </span>
+                    {d.image && (
+                      <div className="aspect-[4/3] w-full overflow-hidden bg-cloud">
+                        <img
+                          src={d.image}
+                          alt={d.imageAlt ?? ""}
+                          loading="lazy"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                    )}
+                    <div className="flex flex-1 flex-col p-6">
+                      <span className="text-xs font-semibold uppercase tracking-wider text-red">
+                        {d.tag}
+                      </span>
+                      <h3 className="mt-2 text-lg font-bold text-navy">{d.name}</h3>
+                      <p className="mt-2 flex-1 text-sm text-slate">{d.summary}</p>
+                      <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-navy transition-transform group-hover:translate-x-1 group-hover:text-red">
+                        Learn more <span aria-hidden>→</span>
+                      </span>
+                    </div>
                   </Link>
                 </motion.div>
               </StaggerItem>

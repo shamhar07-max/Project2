@@ -15,7 +15,13 @@ export default function EcosystemDivision() {
 
   return (
     <div key={division.slug}>
-      <PageHero eyebrow={division.tag} title={division.name} description={division.summary} />
+      <PageHero
+        eyebrow={division.tag}
+        title={division.name}
+        description={division.summary}
+        image={division.image}
+        imageAlt={division.imageAlt}
+      />
       <section className="mx-auto max-w-4xl px-6 py-16 lg:px-8">
         <Reveal>
           <p className="text-lg text-slate">{division.description}</p>
