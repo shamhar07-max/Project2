@@ -74,7 +74,7 @@ export default function GetStarted() {
                 connected opportunity marketplace.
               </p>
             </div>
-            <Button href={`https://${jobsService.domain}`} variant="gradient" size="lg" className="whitespace-nowrap">
+            <Button href={`https://${jobsService.domain}`} variant="primary" size="lg" className="whitespace-nowrap">
               Visit Jobs
             </Button>
           </div>

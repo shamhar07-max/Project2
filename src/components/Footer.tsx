@@ -5,8 +5,7 @@ import Logo from "./Logo"
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-white/10 bg-navy text-white">
-      <div aria-hidden className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-glow to-gold" />
+    <footer className="border-t border-white/10 bg-navy text-white">
       <div className="mx-auto max-w-7xl px-6 py-14 lg:px-8">
         <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 lg:grid-cols-5">
           <div className="col-span-2 sm:col-span-3 lg:col-span-2">
@@ -88,7 +87,7 @@ export default function Footer() {
             <button
               type="button"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/80 transition-all duration-300 hover:-translate-y-1 hover:border-gold hover:text-gold hover:shadow-[0_0_18px_-2px_rgba(199,164,94,0.8)]"
+              className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 text-white/80 transition-all duration-200 hover:-translate-y-0.5 hover:border-white/50 hover:text-white"
               aria-label="Back to top"
             >
               ↑

@@ -4,7 +4,6 @@ import Button from "../components/ui/Button"
 import Carousel from "../components/ui/Carousel"
 import Faq from "../components/Faq"
 import Stats from "../components/Stats"
-import Tilt from "../components/motion/Tilt"
 import LogoTicker, { KpiBand } from "../components/Proof"
 import HeroVisual from "../components/HeroVisual"
 import Logo from "../components/Logo"
@@ -60,9 +59,7 @@ export default function Home() {
           aria-hidden
         />
         <div aria-hidden className="absolute inset-0 overflow-hidden">
-          <div className="absolute -left-24 top-1/4 h-72 w-72 rounded-full bg-red/25 blur-3xl motion-safe:animate-aurora" />
-          <div className="absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-gold/20 blur-3xl motion-safe:animate-aurora" style={{ animationDelay: "-6s" }} />
-          <div className="absolute inset-0 bg-grid-navy opacity-60" />
+          <div className="absolute -right-24 top-0 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
         </div>
         <div className="relative mx-auto grid max-w-7xl gap-16 px-6 py-20 lg:grid-cols-2 lg:items-center lg:px-8 lg:py-28">
           <motion.div
@@ -75,25 +72,24 @@ export default function Home() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.18em] text-white backdrop-blur-md"
+              className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.16em] text-white"
             >
-              <span className="h-1.5 w-1.5 rounded-full bg-gradient-to-r from-red-glow to-gold motion-safe:animate-pulse-dot" />
+              <span className="h-1.5 w-1.5 rounded-full bg-red" />
               People. Technology. Opportunity.
             </motion.p>
-            <h1 className="mt-5 text-balance font-display text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">
-              A higher tomorrow,{" "}
-              <span className="text-gradient motion-safe:animate-gradient">built on evidence.</span>
+            <h1 className="mt-5 text-balance text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+              A higher tomorrow, built on evidence.
             </h1>
             <p className="mt-6 max-w-lg text-lg text-white/80">
               DigitalBurj connects practical education, technology delivery, business
               intelligence and evidence-backed professional opportunity in one coordinated
               ecosystem.
             </p>
-            <div className="mt-10 flex flex-wrap gap-4">
-              <Button to="/get-started" variant="glow" size="lg" icon={<ArrowIcon />}>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Button to="/get-started" variant="primary" size="lg" icon={<ArrowIcon />}>
                 Get Started
               </Button>
-              <Button to="/ecosystem" variant="glass" size="lg">
+              <Button to="/ecosystem" variant="outline-light" size="lg">
                 Explore the Ecosystem
               </Button>
             </div>
@@ -160,10 +156,10 @@ export default function Home() {
           <Stagger className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {divisions.map((d) => (
               <StaggerItem key={d.slug} className="h-full">
-                <Tilt className="h-full rounded-2xl" max={6}>
+                <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.22 }} className="h-full">
                   <Link
                     to={`/ecosystem/${d.slug}`}
-                    className="card-ring group flex h-full flex-col overflow-hidden rounded-2xl border border-cloud bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-navy/15"
+                    className="group flex h-full flex-col overflow-hidden rounded-3xl border border-navy/5 bg-white shadow-[0_12px_32px_-16px_rgba(16,39,60,0.2)] transition-shadow duration-300 hover:shadow-[0_24px_48px_-16px_rgba(16,39,60,0.28)]"
                   >
                     {d.image && (
                       <div className="relative aspect-[4/3] w-full overflow-hidden bg-cloud">
@@ -171,13 +167,9 @@ export default function Home() {
                           src={d.image}
                           alt={d.imageAlt ?? ""}
                           loading="lazy"
-                          className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:rotate-1 group-hover:scale-110"
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
-                        <div
-                          aria-hidden
-                          className="absolute inset-0 bg-gradient-to-t from-navy/50 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-                        />
-                        <span className="absolute left-3 top-3 rounded-full bg-navy/80 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur-md">
+                        <span className="absolute left-3 top-3 rounded-full bg-navy/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white">
                           {d.tag}
                         </span>
                       </div>
@@ -186,15 +178,15 @@ export default function Home() {
                       <span className="text-xs font-semibold uppercase tracking-wider text-red">
                         {d.tag}
                       </span>
-                      <h3 className="mt-2 font-display text-lg font-bold text-navy transition-colors group-hover:text-red">{d.name}</h3>
+                      <h3 className="mt-2 text-lg font-bold text-navy">{d.name}</h3>
                       <p className="mt-2 flex-1 text-sm text-slate">{d.summary}</p>
                       <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-navy">
-                        <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:text-red">Learn more</span>
-                        <span aria-hidden className="flex h-6 w-6 items-center justify-center rounded-full bg-cloud transition-all duration-300 group-hover:bg-red group-hover:text-white">→</span>
+                        <span className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-red">Learn more</span>
+                        <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:text-red">→</span>
                       </span>
                     </div>
                   </Link>
-                </Tilt>
+                </motion.div>
               </StaggerItem>
             ))}
           </Stagger>
@@ -300,19 +292,21 @@ export default function Home() {
         <Reveal delay={0.1} className="mt-10">
           <Carousel slideClassName="basis-[85%] pr-4 sm:basis-1/2 lg:basis-1/3">
             {portfolio.map((p) => (
-              <Tilt key={p.name} className="h-full rounded-2xl" max={5}>
-                <div className="card-ring relative h-full overflow-hidden rounded-2xl border border-cloud bg-white p-6 transition-shadow duration-300 hover:shadow-xl hover:shadow-navy/10">
-                  <div aria-hidden className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-red via-gold to-red bg-[length:200%_auto] motion-safe:animate-gradient" />
-                  <div className="flex items-center justify-between">
-                    <p className="font-display font-bold text-navy">{p.name}</p>
-                    <span className="h-2 w-2 rounded-full bg-gradient-to-r from-red-glow to-gold motion-safe:animate-pulse-dot" />
-                  </div>
-                  <p className="mt-1 text-sm text-slate">{p.description}</p>
-                  <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-cloud px-3 py-1 text-xs font-semibold uppercase tracking-wider text-slate">
-                    {p.status}
-                  </p>
+              <motion.div
+                key={p.name}
+                whileHover={{ y: -4 }}
+                transition={{ duration: 0.2 }}
+                className="h-full rounded-3xl border border-navy/5 bg-white p-6 shadow-[0_12px_32px_-16px_rgba(16,39,60,0.2)]"
+              >
+                <div className="flex items-center justify-between">
+                  <p className="font-bold text-navy">{p.name}</p>
+                  <span className="h-2 w-2 rounded-full bg-red" />
                 </div>
-              </Tilt>
+                <p className="mt-1 text-sm text-slate">{p.description}</p>
+                <p className="mt-4 inline-block rounded-full bg-cloud px-3 py-1 text-xs font-semibold uppercase tracking-wider text-slate">
+                  {p.status}
+                </p>
+              </motion.div>
             ))}
           </Carousel>
         </Reveal>
@@ -324,17 +318,12 @@ export default function Home() {
       </section>
 
       {/* KPI momentum band */}
-      <section className="relative overflow-hidden bg-navy-deep py-20 text-white">
-        <div aria-hidden className="absolute inset-0">
-          <div className="absolute inset-0 bg-grid-navy opacity-70" />
-          <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-red/25 blur-3xl motion-safe:animate-aurora" />
-          <div className="absolute -bottom-24 right-1/4 h-72 w-72 rounded-full bg-gold/20 blur-3xl motion-safe:animate-aurora" style={{ animationDelay: "-6s" }} />
-        </div>
-        <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
+      <section className="bg-cloud py-20">
+        <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <Reveal className="max-w-2xl">
-            <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">Momentum</p>
-            <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-              One platform, <span className="text-gradient-gold motion-safe:animate-gradient">compounding evidence.</span>
+            <p className="text-sm font-semibold uppercase tracking-wider text-red">Momentum</p>
+            <h2 className="mt-3 text-3xl font-bold text-navy sm:text-4xl">
+              One platform, compounding evidence.
             </h2>
           </Reveal>
           <div className="mt-10">
@@ -410,22 +399,21 @@ export default function Home() {
           aria-hidden
         />
         <div aria-hidden className="absolute inset-0 overflow-hidden">
-          <div className="absolute -left-20 bottom-0 h-64 w-64 rounded-full bg-red/25 blur-3xl motion-safe:animate-aurora" />
-          <div className="absolute -right-20 top-0 h-64 w-64 rounded-full bg-gold/20 blur-3xl motion-safe:animate-aurora" style={{ animationDelay: "-5s" }} />
+          <div className="absolute -right-24 top-0 h-72 w-72 rounded-full bg-white/5 blur-3xl" />
         </div>
         <Reveal className="relative mx-auto max-w-4xl px-6 py-20 text-center lg:px-8">
-          <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
-            Choose how you want to <span className="text-gradient motion-safe:animate-gradient">engage.</span>
+          <h2 className="text-3xl font-bold text-white sm:text-4xl">
+            Choose how you want to engage.
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/80">
             Learner, founder, business or employer — get started takes you to the right entry
             point.
           </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <Button to="/get-started" variant="gradient" size="lg" icon={<ArrowIcon />}>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <Button to="/get-started" variant="primary" size="lg" icon={<ArrowIcon />}>
               Get Started
             </Button>
-            <Button to="/contact" variant="glass" size="lg">
+            <Button to="/contact" variant="outline-light" size="lg">
               Talk to us
             </Button>
           </div>

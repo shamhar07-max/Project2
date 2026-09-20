@@ -1,8 +1,8 @@
+import { motion } from "motion/react"
 import { Link } from "react-router-dom"
 import PageHero from "../components/PageHero"
 import Reveal from "../components/motion/Reveal"
 import Stagger, { StaggerItem } from "../components/motion/Stagger"
-import Tilt from "../components/motion/Tilt"
 import Button from "../components/ui/Button"
 import { divisions, jobsService } from "../data/content"
 
@@ -14,15 +14,14 @@ export default function Ecosystem() {
         title="Four divisions. One company."
         description="Distinct divisional experiences, sharing one identity, one authorization model and one evidence standard."
       />
-      <section className="relative mx-auto max-w-6xl px-6 py-16 lg:px-8">
-        <div aria-hidden className="pointer-events-none absolute inset-0 bg-grid-light opacity-40 [mask-image:radial-gradient(60%_50%_at_50%_0%,black,transparent)]" />
-        <Stagger className="relative grid gap-6 sm:grid-cols-2">
+      <section className="mx-auto max-w-6xl px-6 py-16 lg:px-8">
+        <Stagger className="grid gap-6 sm:grid-cols-2">
           {divisions.map((d) => (
             <StaggerItem key={d.slug}>
-              <Tilt className="h-full rounded-2xl" max={5}>
+              <motion.div whileHover={{ y: -4 }} transition={{ duration: 0.22 }} className="h-full">
                 <Link
                   to={`/ecosystem/${d.slug}`}
-                  className="card-ring group flex h-full flex-col overflow-hidden rounded-2xl border border-cloud bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-navy/15"
+                  className="group flex h-full flex-col overflow-hidden rounded-3xl border border-navy/5 bg-white shadow-[0_12px_32px_-16px_rgba(16,39,60,0.2)] transition-shadow duration-300 hover:shadow-[0_24px_48px_-16px_rgba(16,39,60,0.28)]"
                 >
                   {d.image && (
                     <div className="relative aspect-[16/9] w-full overflow-hidden bg-cloud">
@@ -30,13 +29,9 @@ export default function Ecosystem() {
                         src={d.image}
                         alt={d.imageAlt ?? ""}
                         loading="lazy"
-                        className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:rotate-1 group-hover:scale-110"
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
-                      <div
-                        aria-hidden
-                        className="absolute inset-0 bg-gradient-to-t from-navy/60 via-navy/10 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-90"
-                      />
-                      <span className="absolute bottom-3 left-3 rounded-full bg-white/15 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-white backdrop-blur-md">
+                      <span className="absolute bottom-3 left-3 rounded-full bg-navy/80 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-white">
                         {d.tag}
                       </span>
                     </div>
@@ -45,30 +40,29 @@ export default function Ecosystem() {
                     <span className="text-xs font-semibold uppercase tracking-wider text-red">
                       {d.tag}
                     </span>
-                    <h2 className="mt-2 font-display text-2xl font-bold text-navy transition-colors group-hover:text-red">{d.name}</h2>
+                    <h2 className="mt-2 text-2xl font-bold text-navy">{d.name}</h2>
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-slate">{d.summary}</p>
                     <p className="mt-3 line-clamp-2 text-sm text-slate/80">{d.description}</p>
-                    <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-navy">
-                      <span className="transition-transform duration-300 group-hover:translate-x-1 group-hover:text-red">Division overview</span>
-                      <span aria-hidden className="flex h-7 w-7 items-center justify-center rounded-full bg-navy text-white transition-all duration-300 group-hover:bg-red">→</span>
+                    <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-navy transition-colors group-hover:text-red">
+                      Division overview <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
                     </span>
                   </div>
                 </Link>
-              </Tilt>
+              </motion.div>
             </StaggerItem>
           ))}
         </Stagger>
 
-        <Reveal delay={0.1} className="relative mt-8">
-          <div className="overflow-hidden rounded-2xl border border-cloud bg-gradient-to-br from-cloud via-white to-cloud p-8 shadow-sm sm:flex sm:items-center sm:justify-between sm:gap-6">
+        <Reveal delay={0.1} className="mt-8">
+          <div className="flex flex-col items-start justify-between gap-4 rounded-3xl border border-navy/5 bg-cloud p-8 sm:flex-row sm:items-center">
             <div>
               <span className="text-xs font-semibold uppercase tracking-wider text-red">
                 {jobsService.tag}
               </span>
-              <h2 className="mt-2 font-display text-xl font-bold text-navy">{jobsService.name}</h2>
+              <h2 className="mt-2 text-xl font-bold text-navy">{jobsService.name}</h2>
               <p className="mt-2 max-w-xl text-sm text-slate">{jobsService.description}</p>
             </div>
-            <Button href={`https://${jobsService.domain}`} variant="gradient" className="mt-4 whitespace-nowrap sm:mt-0">
+            <Button href={`https://${jobsService.domain}`} variant="dark" className="whitespace-nowrap">
               Visit Jobs
             </Button>
           </div>

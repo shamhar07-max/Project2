@@ -2,7 +2,18 @@ import { motion } from "motion/react"
 import type { ReactNode } from "react"
 import { Link } from "react-router-dom"
 
-type Variant = "primary" | "dark" | "outline" | "outline-light" | "ghost" | "gradient" | "glow" | "glass"
+// iOS-style buttons on brand tokens: full-radius, semibold, soft shadow,
+// spring press (scale 0.97). Red is reserved for the primary action only.
+type Variant =
+  | "primary"
+  | "dark"
+  | "secondary"
+  | "outline"
+  | "outline-light"
+  | "ghost"
+  | "gradient"
+  | "glow"
+  | "glass"
 
 type Size = "sm" | "md" | "lg"
 
@@ -38,24 +49,23 @@ type ButtonAsButton = CommonProps & {
 type ButtonProps = ButtonAsLink | ButtonAsAnchor | ButtonAsButton
 
 const variantClasses: Record<Variant, string> = {
-  primary: "bg-red text-white shadow-lg shadow-red/30",
-  dark: "bg-navy text-white shadow-lg shadow-navy/30",
-  outline: "border border-navy/20 text-navy bg-white hover:bg-cloud hover:border-navy/40 hover:shadow-md",
-  "outline-light": "border border-white/30 text-white hover:bg-white/10 hover:border-white/60",
+  primary: "bg-red text-white shadow-[0_8px_20px_-8px_rgba(227,27,35,0.5)] hover:brightness-105 active:brightness-95",
+  dark: "bg-navy text-white shadow-[0_8px_20px_-10px_rgba(16,39,60,0.6)] hover:brightness-125 active:brightness-100",
+  secondary: "bg-cloud text-navy hover:bg-navy/10 active:bg-navy/15",
+  outline: "border border-navy/15 text-navy bg-white hover:border-navy/30 hover:bg-cloud/60",
+  "outline-light": "border border-white/25 text-white hover:bg-white/10 active:bg-white/15",
   ghost: "text-navy hover:text-red",
-  gradient:
-    "text-white shadow-xl shadow-red/30 bg-[linear-gradient(110deg,#e31b23,#ff4d55_40%,#c7a45e_75%,#e31b23)] bg-[length:220%_auto] hover:bg-right motion-safe:animate-gradient",
-  glow: "bg-red text-white shadow-[0_0_24px_-4px_rgba(227,27,35,0.7),0_8px_24px_-8px_rgba(227,27,35,0.6)] hover:shadow-[0_0_36px_-2px_rgba(227,27,35,0.9),0_8px_28px_-6px_rgba(227,27,35,0.7)]",
-  glass: "glass border border-white/25 text-white hover:bg-white/15 hover:border-white/50",
+  // Legacy aliases from the maximalist pass — mapped back to brand-safe iOS styles
+  gradient: "bg-red text-white shadow-[0_8px_20px_-8px_rgba(227,27,35,0.5)] hover:brightness-105 active:brightness-95",
+  glow: "bg-red text-white shadow-[0_8px_20px_-8px_rgba(227,27,35,0.5)] hover:brightness-105 active:brightness-95",
+  glass: "glass border border-white/25 text-white hover:bg-white/15",
 }
 
 const sizeClasses: Record<Size, string> = {
-  sm: "px-4 py-2 text-xs",
+  sm: "px-4 py-2 text-[13px]",
   md: "px-6 py-3 text-sm",
-  lg: "px-8 py-3.5 text-base",
+  lg: "px-8 py-3.5 text-[15px]",
 }
-
-const shineVariants: Variant[] = ["primary", "dark", "gradient", "glow"]
 
 function Content({ children, icon }: { children: ReactNode; icon?: ReactNode }) {
   return (
@@ -66,34 +76,24 @@ function Content({ children, icon }: { children: ReactNode; icon?: ReactNode }) 
   )
 }
 
-function Shine({ variant }: { variant: Variant }) {
-  if (!shineVariants.includes(variant)) return null
-  return (
-    <span
-      aria-hidden
-      className="pointer-events-none absolute inset-0 -translate-x-full skew-x-12 bg-gradient-to-r from-transparent via-white/30 to-transparent transition-transform duration-700 ease-out group-hover:translate-x-full"
-    />
-  )
-}
-
 const base =
-  "group relative inline-flex items-center justify-center overflow-hidden rounded-xl font-semibold transition-all duration-300 hover:-translate-y-0.5 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-red active:translate-y-0"
+  "group relative inline-flex items-center justify-center overflow-hidden rounded-full font-semibold transition-[background-color,border-color,filter,transform] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
 
 export default function Button(props: ButtonProps) {
   const { children, variant = "primary", size = "md", className = "", icon } = props
   const cls = `${base} ${variantClasses[variant]} ${sizeClasses[size]} ${className}`
 
+  // iOS spring: gentle lift on hover, physical press on tap
   const motionProps = {
-    whileHover: { y: -3, scale: 1.02 },
-    whileTap: { scale: 0.96, y: 0 },
-    transition: { type: "spring" as const, stiffness: 400, damping: 22 },
+    whileHover: { scale: 1.02 },
+    whileTap: { scale: 0.97 },
+    transition: { type: "spring" as const, stiffness: 500, damping: 30 },
   }
 
   if ("to" in props && props.to) {
     return (
       <motion.div {...motionProps} className="inline-block">
         <Link to={props.to} className={cls}>
-          <Shine variant={variant} />
           <Content icon={icon}>{children}</Content>
         </Link>
       </motion.div>
@@ -104,7 +104,6 @@ export default function Button(props: ButtonProps) {
     return (
       <motion.div {...motionProps} className="inline-block">
         <a href={props.href} className={cls}>
-          <Shine variant={variant} />
           <Content icon={icon}>{children}</Content>
         </a>
       </motion.div>
@@ -118,7 +117,6 @@ export default function Button(props: ButtonProps) {
       onClick={"onClick" in props ? props.onClick : undefined}
       className={cls}
     >
-      <Shine variant={variant} />
       <Content icon={icon}>{children}</Content>
     </motion.button>
   )
